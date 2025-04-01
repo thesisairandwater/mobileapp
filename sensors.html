@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensor Info</title>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f2f2f2;
+            font-family: "Fredoka One", cursive;
+            background-image: url('airandwater.jpg');
+            background-size: cover;
+            background-position: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .sensor {
+            background: #e3f2fd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sensor h2 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #007bff;
+        }
+
+        .sensor p {
+            font-size: 14px;
+            color: #333;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                width: 100%;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            .sensor h2 {
+                font-size: 16px;
+            }
+
+            .sensor p {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sensor Information</h1>
+
+        <div class="sensor">
+            <h2>🌿 MQ131 (Ozone Sensor)</h2>
+            <p>🔹 **Fun Fact:** MQ131 sensors can detect **ozone levels in air**, which is useful for monitoring air pollution.</p>
+        </div>
+
+        <div class="sensor">
+            <h2>💨 MH-Z19 CO₂ Sensor</h2>
+            <p>🔹 **Fun Fact:** The MH-Z19 can **measure CO₂ levels in the air** and is commonly used in **indoor air quality monitoring**.</p>
+        </div>
+
+        <div class="sensor">
+            <h2>🌫️ PMS (Particulate Matter Sensor)</h2>
+            <p>🔹 **Fun Fact:** PMS sensors can detect particles as small as **0.3 microns**, which is **smaller than a human hair**!</p>
+        </div>
+
+        <div class="sensor">
+            <h2>⚗️ pH Sensor</h2>
+            <p>🔹 **Fun Fact:** The **pH scale ranges from 0 to 14**, and pH sensors help measure if a substance is acidic or basic.</p>
+        </div>
+
+        <div class="sensor">
+            <h2>💧 Conductivity Sensor</h2>
+            <p>🔹 **Fun Fact:** Conductivity sensors can measure **how well water can carry electricity**, which helps determine water purity.</p>
+        </div>
+
+        <div class="sensor">
+            <h2>🌊 Turbidity Sensor</h2>
+            <p>🔹 **Fun Fact:** Turbidity sensors help measure **how clear or cloudy water is** and are used in **water treatment plants**.</p>
+        </div>
+
+        <button onclick="goBack()">⬅️ Back to Homepage</button>
+    </div>
+
+    <script>
+        function goBack() {
+            window.location.href = "homepage.html";
+        }
+    </script>
+</body>
+</html>
