@@ -46,8 +46,8 @@
         }
         .sensor-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* Two columns on mobile */
-            gap: 10px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
             margin-top: 20px;
         }
         .sensor-box {
@@ -111,14 +111,48 @@
             margin-top: 20px;
         }
 
-        @media (max-width: 600px) {
+        /* Mobile view improvements */
+        @media (max-width: 768px) {
             .sensor-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* One column on tablets */
             }
             .header-item {
                 font-size: 1em;
                 padding: 8px 15px;
-                margin: 0 5px;
+                margin: 5px 0;
+            }
+            h1 {
+                font-size: 1.6em;
+            }
+            .sensor-box h2 {
+                font-size: 1.1em;
+            }
+            .sensor-box p {
+                font-size: 1.3em;
+            }
+            .timestamp {
+                font-size: 0.9em;
+            }
+        }
+
+        /* Mobile-first approach */
+        @media (max-width: 600px) {
+            .header-item {
+                font-size: 1em;
+                padding: 8px 12px;
+                margin: 5px;
+            }
+            h1 {
+                font-size: 1.4em;
+            }
+            .sensor-box h2 {
+                font-size: 1.1em;
+            }
+            .sensor-box p {
+                font-size: 1.2em;
+            }
+            .sensor-grid {
+                grid-template-columns: 1fr; /* Single column for small screens */
             }
         }
     </style>
