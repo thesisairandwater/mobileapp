@@ -8,7 +8,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    
     <style>
         body {
             font-family: 'Fredoka One', cursive;
@@ -16,9 +16,60 @@
             text-align: center;
             padding: 10px;
             color: white;
-            position: relative;
             margin: 0;
         }
+        
+        .menu-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .menu-btn {
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+            padding: 5px;
+        }
+
+        .menu-btn:focus {
+            outline: none;
+        }
+
+        .menu-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: white;
+            color: black;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            width: 160px;
+            text-align: left;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .menu-dropdown a {
+            display: block;
+            padding: 12px;
+            text-decoration: none;
+            color: black;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        .menu-dropdown a:hover {
+            background: #007BFF;
+            color: white;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .container {
             width: 100%;
             max-width: 1000px;
@@ -29,57 +80,69 @@
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             color: black;
         }
+
         h1 {
             color: #333;
             font-size: 1.8em;
         }
+
         .section {
             margin-top: 20px;
             padding: 15px;
             border-radius: 10px;
         }
+
         .air-section {
             background: rgba(255, 200, 0, 0.2);
         }
+
         .water-section {
             background: rgba(0, 150, 255, 0.2);
         }
+
         .sensor-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 15px;
             margin-top: 20px;
         }
+
         .sensor-box {
             background: #fff;
             padding: 15px;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
+
         .sensor-box h2 {
             font-size: 1.2em;
             color: #007BFF;
         }
+
         .sensor-box p {
             font-size: 1.5em;
             font-weight: bold;
             margin: 10px 0;
         }
+
         .timestamp {
             margin-top: 20px;
             font-size: 1em;
             color: #666;
         }
+
         .reports {
             margin-top: 30px;
             padding: 20px;
             background: rgba(0, 0, 0, 0.1);
             border-radius: 10px;
         }
+
         .report-list {
             list-style: none;
             padding: 0;
         }
+
         .report-list li {
             background: #fff;
             padding: 10px;
@@ -88,80 +151,16 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             text-align: left;
         }
-        .header-item {
-            display: inline-block;
-            padding: 10px 20px;
-            background: #007BFF;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin: 0 10px;
-            cursor: pointer;
-        }
-
-        #header {
-            margin-bottom: 20px;
-        }
-
-        #header .header-item {
-            font-size: 1.1em;
-        }
-
-        .content {
-            margin-top: 20px;
-        }
-
-        /* Mobile view improvements */
-        @media (max-width: 768px) {
-            .sensor-grid {
-                grid-template-columns: 1fr; /* One column on tablets */
-            }
-            .header-item {
-                font-size: 1em;
-                padding: 8px 15px;
-                margin: 5px 0;
-            }
-            h1 {
-                font-size: 1.6em;
-            }
-            .sensor-box h2 {
-                font-size: 1.1em;
-            }
-            .sensor-box p {
-                font-size: 1.3em;
-            }
-            .timestamp {
-                font-size: 0.9em;
-            }
-        }
-
-        /* Mobile-first approach */
-        @media (max-width: 600px) {
-            .header-item {
-                font-size: 1em;
-                padding: 8px 12px;
-                margin: 5px;
-            }
-            h1 {
-                font-size: 1.4em;
-            }
-            .sensor-box h2 {
-                font-size: 1.1em;
-            }
-            .sensor-box p {
-                font-size: 1.2em;
-            }
-            .sensor-grid {
-                grid-template-columns: 1fr; /* Single column for small screens */
-            }
-        }
     </style>
 </head>
 <body>
-    <div id="header">
-        <div class="header-item" onclick="window.location.href='sensors.html'">About Sensor</div>
-        <div class="header-item" onclick="window.location.href='notification.html'">Notifications</div>
-        <div class="header-item" onclick="window.location.href='index.html'">Logout</div>
+    <div class="menu-container">
+        <button class="menu-btn">&#8942;</button>
+        <div class="menu-dropdown">
+            <a href="sensors.html">About Sensor</a>
+            <a href="notification.html">Notifications</a>
+            <a href="index.html">Logout</a>
+        </div>
     </div>
 
     <div class="content">
@@ -171,45 +170,27 @@
 
     <div class="container">
         <h1>Sensor Data Dashboard</h1>
-        
+
         <div class="section air-section">
             <h2>Air Quality</h2>
             <div class="sensor-grid">
-                <div class="sensor-box">
-                    <h2>CO₂</h2>
-                    <p><span id="co2">Loading...</span></p>
-                </div>
-                <div class="sensor-box">
-                    <h2>Ozone</h2>
-                    <p><span id="ozone">Loading...</span></p>
-                </div>
-                <div class="sensor-box">
-                    <h2>PM2.5</h2>
-                    <p><span id="pm25">Loading...</span></p>
-                </div>
+                <div class="sensor-box"><h2>CO₂</h2><p><span id="co2">Loading...</span></p></div>
+                <div class="sensor-box"><h2>Ozone</h2><p><span id="ozone">Loading...</span></p></div>
+                <div class="sensor-box"><h2>PM2.5</h2><p><span id="pm25">Loading...</span></p></div>
             </div>
         </div>
-        
+
         <div class="section water-section">
             <h2>Water Quality</h2>
             <div class="sensor-grid">
-                <div class="sensor-box">
-                    <h2>TDS</h2>
-                    <p><span id="tds">Loading...</span></p>
-                </div>
-                <div class="sensor-box">
-                    <h2>pH Level</h2>
-                    <p><span id="ph">Loading...</span></p>
-                </div>
-                <div class="sensor-box">
-                    <h2>Turbidity</h2>
-                    <p><span id="turbidity">Loading...</span></p>
-                </div>
+                <div class="sensor-box"><h2>TDS</h2><p><span id="tds">Loading...</span></p></div>
+                <div class="sensor-box"><h2>pH Level</h2><p><span id="ph">Loading...</span></p></div>
+                <div class="sensor-box"><h2>Turbidity</h2><p><span id="turbidity">Loading...</span></p></div>
             </div>
         </div>
 
         <p class="timestamp">Last Updated: <span id="timestamp">Loading...</span></p>
-        
+
         <div class="reports">
             <h2>Past Reports</h2>
             <ul id="report-list" class="report-list"></ul>
@@ -217,6 +198,18 @@
     </div>
 
     <script>
+        $(document).ready(function() {
+            $(".menu-btn").click(function() {
+                $(".menu-dropdown").toggle();
+            });
+
+            $(document).click(function(event) {
+                if (!$(event.target).closest(".menu-container").length) {
+                    $(".menu-dropdown").hide();
+                }
+            });
+        });
+
         const firebaseConfig = {
             apiKey: "AIzaSyCn87T1nQGDszjP6SzqEgipiuS7O1J4h9E",
             authDomain: "thesismonitoring.firebaseapp.com",
@@ -244,7 +237,11 @@
 
         dbRef.limitToLast(100).on("child_added", function(snapshot) {
             const data = snapshot.val();
-            $("#report-list").prepend(`<li>${data.timestamp || "Unknown Date"}: CO2: ${data.CO2}, Ozone: ${data.Ozone}, PM2.5: ${data.PM2_5}, TDS: ${data["TDS-C"]}, pH: ${data.pH}, Turbidity: ${data.Turbidity}</li>`);
+            $("#report-list").prepend(
+                `<li><strong>${data.timestamp || "Unknown Date"}</strong>: 
+                CO₂: ${data.CO2}, Ozone: ${data.Ozone}, PM2.5: ${data.PM2_5}, 
+                TDS: ${data["TDS-C"]}, pH: ${data.pH}, Turbidity: ${data.Turbidity}</li>`
+            );
         });
     </script>
 </body>
