@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sensor Info</title>
     <style>
-        /* Basic reset */
         * {
             margin: 0;
             padding: 0;
@@ -18,8 +17,10 @@
             background-image: url('airandwater.jpg');
             background-size: cover;
             background-position: center;
+            display: flex;
             flex-direction: column;
             align-items: center;
+            padding: 20px;
         }
 
         .container {
@@ -73,10 +74,6 @@
         }
 
         @media (max-width: 600px) {
-            body {
-                padding: 10px;
-            }
-
             .container {
                 width: 100%;
                 padding: 15px;
@@ -84,14 +81,6 @@
 
             h1 {
                 font-size: 22px;
-            }
-
-            .sensor h2 {
-                font-size: 16px;
-            }
-
-            .sensor p {
-                font-size: 12px;
             }
         }
     </style>
@@ -102,32 +91,50 @@
 
         <div class="sensor">
             <h2>🌿 MQ131 (Ozone Sensor)</h2>
-            <p>🔹 **Fun Fact:** MQ131 sensors can detect **ozone levels in air**, which is useful for monitoring air pollution.</p>
+            <p>🔹 **Detects ozone (O₃) in the air** and is used for **air quality monitoring**.</p>
+            <p>🔹 **Parameters:** Ozone concentration (ppm).</p>
+            <p>🔹 **Functionality:** Uses a gas-sensitive semiconductor to detect ozone levels.</p>
+            <p>🔹 **Application:** Pollution control, industrial safety.</p>
         </div>
 
         <div class="sensor">
             <h2>💨 MH-Z19 CO₂ Sensor</h2>
-            <p>🔹 **Fun Fact:** The MH-Z19 can **measure CO₂ levels in the air** and is commonly used in **indoor air quality monitoring**.</p>
+            <p>🔹 Uses **NDIR technology** to measure **carbon dioxide (CO₂) levels**.</p>
+            <p>🔹 **Parameters:** CO₂ concentration (ppm), temperature.</p>
+            <p>🔹 **Functionality:** Infrared absorption detects CO₂ levels accurately.</p>
+            <p>🔹 **Application:** Indoor air quality monitoring, HVAC systems.</p>
         </div>
 
         <div class="sensor">
             <h2>🌫️ PMS (Particulate Matter Sensor)</h2>
-            <p>🔹 **Fun Fact:** PMS sensors can detect particles as small as **0.3 microns**, which is **smaller than a human hair**!</p>
+            <p>🔹 Detects **PM1.0, PM2.5, and PM10 particles** in the air.</p>
+            <p>🔹 **Parameters:** PM1.0, PM2.5, PM10 concentrations (µg/m³).</p>
+            <p>🔹 **Functionality:** Uses a laser-based scattering method to measure particle density.</p>
+            <p>🔹 **Application:** Air pollution measurement, environmental studies.</p>
         </div>
 
         <div class="sensor">
             <h2>⚗️ pH Sensor</h2>
-            <p>🔹 **Fun Fact:** The **pH scale ranges from 0 to 14**, and pH sensors help measure if a substance is acidic or basic.</p>
+            <p>🔹 Measures **the acidity or alkalinity of a solution**.</p>
+            <p>🔹 **Parameters:** pH value (0-14).</p>
+            <p>🔹 **Functionality:** Glass electrode detects hydrogen ion activity.</p>
+            <p>🔹 **Application:** Water quality testing, agriculture, aquariums.</p>
         </div>
 
         <div class="sensor">
             <h2>💧 Conductivity Sensor</h2>
-            <p>🔹 **Fun Fact:** Conductivity sensors can measure **how well water can carry electricity**, which helps determine water purity.</p>
+            <p>🔹 Measures **water’s ability to conduct electricity**, indicating purity.</p>
+            <p>🔹 **Parameters:** Electrical conductivity (µS/cm).</p>
+            <p>🔹 **Functionality:** Measures ion concentration in water using electrode plates.</p>
+            <p>🔹 **Application:** Water treatment, environmental monitoring.</p>
         </div>
 
         <div class="sensor">
             <h2>🌊 Turbidity Sensor</h2>
-            <p>🔹 **Fun Fact:** Turbidity sensors help measure **how clear or cloudy water is** and are used in **water treatment plants**.</p>
+            <p>🔹 Measures **water clarity** by detecting suspended particles.</p>
+            <p>🔹 **Parameters:** Turbidity level (NTU - Nephelometric Turbidity Units).</p>
+            <p>🔹 **Functionality:** Uses an optical sensor to measure light scattering.</p>
+            <p>🔹 **Application:** Water treatment, wastewater management.</p>
         </div>
 
         <button onclick="goBack()">⬅️ Back to Homepage</button>
