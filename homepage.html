@@ -1,243 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Homepage</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: "Fredoka One", cursive;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensor Data Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    body {
-      background-color: #f2f2f2;
-      font-family: "Fredoka One", cursive;
-      background-image: url('airandwater.jpg');
-      background-size: cover;
-      background-position: center;
-    }
-
-    .navbar {
-      background-color: rgba(5, 131, 210, 0.8);
-      padding: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 10;
-    }
-
-    .navbar .logo {
-      color: white;
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-
-    .menu-icon {
-      background-color: transparent;
-      border: none;
-      color: white;
-      font-size: 30px;
-      cursor: pointer;
-    }
-
-    /* Header part */
-    #header {
-      background-color: rgba(255, 255, 255, 0.9);
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      display: none;
-      margin-top: 60px; /* Adjusted for fixed navbar */
-    }
-
-    .header-item {
-      font-size: 1.1rem;
-      color: #0583D2;
-      margin-bottom: 10px;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .header-item:hover {
-      text-decoration: underline;
-    }
-
-    /* Content */
-    .content {
-      padding: 80px 20px 20px; 
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 2rem;
-      color: #0583D2;
-      margin-bottom: 20px;
-    }
-
-    p {
-      font-size: 1.2rem;
-      color: #333;
-    }
-
-    .sensors-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-top: 20px;
-    }
-
-    .sensor-card {
-      background-color: rgba(255, 255, 255, 0.8);
-      border-radius: 10px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      cursor: pointer;
-    }
-
-    .sensor-card:hover {
-      background-color: rgba(5, 131, 210, 0.1);
-    }
-
-    .sensor-card img {
-      width: 50px;
-      height: 50px;
-      margin-bottom: 10px;
-    }
-
-    .sensor-name {
-      font-size: 1rem;
-      color: #0583D2;
-      font-weight: bold;
-    }
-
-    .sensor-value {
-      font-size: 1.2rem;
-      color: #333;
-      margin-top: 10px;
-    }
-
-    @media (max-width: 600px) {
-      .navbar {
-        padding: 10px;
-      }
-
-      .navbar .logo {
-        font-size: 1.2rem;
-      }
-
-      .sensors-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-  </style>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
-
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyCn87T1nQGDszjP6SzqEgipiuS7O1J4h9E",
-      authDomain: "thesismonitoring.firebaseapp.com",
-      databaseURL: "https://thesismonitoring-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "thesismonitoring",
-      storageBucket: "thesismonitoring.firebasestorage.app",
-      messagingSenderId: "259146059264",
-      appId: "1:259146059264:web:49cb7727dede0c751bd2e5",
-      measurementId: "G-C0R7LJJPC8"
-    };
-
-    const app = firebase.initializeApp(firebaseConfig);
-    const database = firebase.database(app);
-
-    function fetchSensorData() {
-      const sensorRef = database.ref('sensors/'); 
-
-      sensorRef.on('value', (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-          document.getElementById("mq131-value").textContent = data.MQ131.value + " ppm";
-          document.getElementById("co2-value").textContent = data.CO2.value + " ppm";
-          document.getElementById("pms-value").textContent = data.PMS.value + " µg/m³";
-          document.getElementById("ph-value").textContent = data.pH.value;
-          document.getElementById("conductivity-value").textContent = data.Conductivity.value + " mg/L";
-          document.getElementById("turbidity-value").textContent = data.Turbidity.value + "mg/L";
+    <style>
+        body {
+            font-family: 'Fredoka One', cursive;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            text-align: center;
+            padding: 10px;
+            color: white;
+            position: relative;
+            margin: 0;
         }
-      });
-    }
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            color: black;
+        }
+        h1 {
+            color: #333;
+            font-size: 1.8em;
+        }
+        .section {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .air-section {
+            background: rgba(255, 200, 0, 0.2);
+        }
+        .water-section {
+            background: rgba(0, 150, 255, 0.2);
+        }
+        .sensor-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two columns on mobile */
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .sensor-box {
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .sensor-box h2 {
+            font-size: 1.2em;
+            color: #007BFF;
+        }
+        .sensor-box p {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .timestamp {
+            margin-top: 20px;
+            font-size: 1em;
+            color: #666;
+        }
+        .reports {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .report-list {
+            list-style: none;
+            padding: 0;
+        }
+        .report-list li {
+            background: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            text-align: left;
+        }
+        .header-item {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
 
-    window.onload = fetchSensorData;
-  </script>
+        #header {
+            margin-bottom: 20px;
+        }
+
+        #header .header-item {
+            font-size: 1.1em;
+        }
+
+        .content {
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .sensor-grid {
+                grid-template-columns: 1fr;
+            }
+            .header-item {
+                font-size: 1em;
+                padding: 8px 15px;
+                margin: 0 5px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="navbar">
-    <div class="logo">Air & Water Quality</div>
-    <button class="menu-icon" onclick="toggleHeader()">&#x2022;&#x2022;&#x2022;</button>
-  </div>
-
-  <div id="header">
-    <div class="header-item" onclick="window.location.href='sensors.html'">About Sensor</div>
-    <div class="header-item" onclick="window.location.href='notification.html'">Notifications</div>
-    <div class="header-item" onclick="window.location.href='index.html'">Logout</div>
-  </div>
-
-  <div class="content">
-    <h1>Welcome!!!</h1>
-    <p>Monitoring the Air and Water Quality</p>
-
-    <div class="sensors-grid">
-      <div class="sensor-card" onclick="viewSensor('MQ131')">
-        <img src="mq131sensor.jpg" alt="MQ131 Sensor">
-        <div class="sensor-name">MQ131 Sensor</div>
-        <div id="mq131-value" class="sensor-value">Loading...</div>
-      </div>
-      <div class="sensor-card" onclick="viewSensor('CO2')">
-        <img src="mhz19.jpg" alt="CO2 Sensor">
-        <div class="sensor-name">CO₂ Sensor (MH-Z19)</div>
-        <div id="co2-value" class="sensor-value">Loading...</div>
-      </div>
-      <div class="sensor-card" onclick="viewSensor('PMS')">
-        <img src="pms5003.jpg" alt="PMS Sensor">
-        <div class="sensor-name">PMS (Particulate Matter)</div>
-        <div id="pms-value" class="sensor-value">Loading...</div>
-      </div>
-      <div class="sensor-card" onclick="viewSensor('pH')">
-        <img src="phsensor.jpg" alt="pH Sensor">
-        <div class="sensor-name">pH Sensor</div>
-        <div id="ph-value" class="sensor-value">Loading...</div>
-      </div>
-      <div class="sensor-card" onclick="viewSensor('Conductivity')">
-        <img src="conductivitysensor.jpg" alt="Conductivity Sensor">
-        <div class="sensor-name">Conductivity Sensor</div>
-        <div id="conductivity-value" class="sensor-value">Loading...</div>
-      </div>
-      <div class="sensor-card" onclick="viewSensor('Turbidity')">
-        <img src="turbiditysensor.jpg" alt="Turbidity Sensor">
-        <div class="sensor-name">Turbidity Sensor</div>
-        <div id="turbidity-value" class="sensor-value">Loading...</div>
-      </div>
+    <div id="header">
+        <div class="header-item" onclick="window.location.href='sensors.html'">About Sensor</div>
+        <div class="header-item" onclick="window.location.href='notification.html'">Notifications</div>
+        <div class="header-item" onclick="window.location.href='index.html'">Logout</div>
     </div>
-  </div>
 
-  <script>
-    function toggleHeader() {
-      const header = document.getElementById("header");
-      if (header.style.display === "none" || header.style.display === "") {
-        header.style.display = "block";
-      } else {
-        header.style.display = "none";
-      }
-    }
+    <div class="content">
+        <h1>Welcome!!!</h1>
+        <p>Monitoring the Air and Water Quality</p>
+    </div>
 
-    function viewSensor(sensorName) {
-      alert("Viewing data for " + sensorName);
-    }
-  </script>
+    <div class="container">
+        <h1>Sensor Data Dashboard</h1>
+        
+        <div class="section air-section">
+            <h2>Air Quality</h2>
+            <div class="sensor-grid">
+                <div class="sensor-box">
+                    <h2>CO₂</h2>
+                    <p><span id="co2">Loading...</span></p>
+                </div>
+                <div class="sensor-box">
+                    <h2>Ozone</h2>
+                    <p><span id="ozone">Loading...</span></p>
+                </div>
+                <div class="sensor-box">
+                    <h2>PM2.5</h2>
+                    <p><span id="pm25">Loading...</span></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section water-section">
+            <h2>Water Quality</h2>
+            <div class="sensor-grid">
+                <div class="sensor-box">
+                    <h2>TDS</h2>
+                    <p><span id="tds">Loading...</span></p>
+                </div>
+                <div class="sensor-box">
+                    <h2>pH Level</h2>
+                    <p><span id="ph">Loading...</span></p>
+                </div>
+                <div class="sensor-box">
+                    <h2>Turbidity</h2>
+                    <p><span id="turbidity">Loading...</span></p>
+                </div>
+            </div>
+        </div>
+
+        <p class="timestamp">Last Updated: <span id="timestamp">Loading...</span></p>
+        
+        <div class="reports">
+            <h2>Past Reports</h2>
+            <ul id="report-list" class="report-list"></ul>
+        </div>
+    </div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCn87T1nQGDszjP6SzqEgipiuS7O1J4h9E",
+            authDomain: "thesismonitoring.firebaseapp.com",
+            databaseURL: "https://thesismonitoring-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "thesismonitoring",
+            storageBucket: "thesismonitoring.firebasestorage.app",
+            messagingSenderId: "259146059264",
+            appId: "1:259146059264:web:49cb7727dede0c751bd2e5",
+            measurementId: "G-C0R7LJJPC8"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const dbRef = firebase.database().ref("sensor_data");
+
+        dbRef.limitToLast(1).on("child_added", function(snapshot) {
+            const data = snapshot.val();
+            $("#co2").text(data.CO2 || "N/A");
+            $("#ozone").text(data.Ozone || "N/A");
+            $("#pm25").text(data.PM2_5 || "N/A");
+            $("#tds").text(data["TDS-C"] || "N/A");
+            $("#ph").text(data.pH || "N/A");
+            $("#turbidity").text(data.Turbidity || "N/A");
+            $("#timestamp").text(data.timestamp || "N/A");
+        });
+
+        dbRef.limitToLast(100).on("child_added", function(snapshot) {
+            const data = snapshot.val();
+            $("#report-list").prepend(`<li>${data.timestamp || "Unknown Date"}: CO2: ${data.CO2}, Ozone: ${data.Ozone}, PM2.5: ${data.PM2_5}, TDS: ${data["TDS-C"]}, pH: ${data.pH}, Turbidity: ${data.Turbidity}</li>`);
+        });
+    </script>
 </body>
 </html>
